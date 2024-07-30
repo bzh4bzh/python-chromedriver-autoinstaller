@@ -206,7 +206,7 @@ def get_major_version(version):
 
 def get_matched_chromedriver_version(chrome_version, no_ssl=False):
     """
-    Try to find a specific version of ChromeDriver to match a version of cCrome
+    Try to find a specific version of ChromeDriver to match a version of Chrome
 
     :param chrome_version: the version of Chrome to match against
     :param no_ssl:         get version list using unsecured HTTP get
@@ -257,16 +257,16 @@ def print_chromedriver_path():
     print(get_chromedriver_path())
 
 
-def download_chromedriver(path: Optional[AnyStr] = None, no_ssl: bool = False):
+def download_chromedriver(path: Optional[AnyStr] = None, no_ssl: bool = False, version: str | None = None):
     """
     Downloads, unzips and installs chromedriver.
     If a chromedriver binary is found in PATH it will be copied, otherwise downloaded.
-
     :param str path: Path of the directory where to save the downloaded chromedriver to.
     :param bool no_ssl: Determines whether or not to use the encryption protocol when downloading the chrome driver.
+    :param version: Specific version to install instead of latest must contain Major.Minor
     :return: The file path of chromedriver
     """
-    chrome_version = get_chrome_version()
+    chrome_version = get_chrome_version() if version is None else version
     if not chrome_version:
         logging.debug("Chrome is not installed.")
         return
